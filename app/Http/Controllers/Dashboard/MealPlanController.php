@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\MealPlanRequest;
-use App\Models\Equipment;
 use App\Models\MealPlan;
 use App\Services\FilterService;
 use Illuminate\Http\Request;
@@ -33,7 +32,7 @@ class MealPlanController extends Controller
 
         $filters = $request->only(['status', 'name', 'category']);
 
-        $query = Equipment::query();
+        $query = MealPlan::query();
 
         $this->filterService->applyFilters($query, $filters);
 

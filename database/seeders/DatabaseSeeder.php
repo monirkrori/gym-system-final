@@ -16,6 +16,14 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             SuperAdminSeeder::class,
+            EquipmentSeeder::class,
+            MealPlanSeeder::class,
+            MembershipPackageSeeder::class,
+            MembershipPlanSeeder::class,
+            UserMembershipSeeder::class,
+            TrainerSeeder::class,
+            UserSeeder::class,
+            TrainingSessionSeeder::class,
         ]);
     }
 }
