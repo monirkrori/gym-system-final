@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('calories_per_day');
+            $table->decimal('price', 8, 2);
             $table->timestamps();
             $table->softDeletes();
         });

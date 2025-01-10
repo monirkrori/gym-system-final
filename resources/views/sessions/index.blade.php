@@ -189,25 +189,25 @@
                                     <td>{{ $session->trainer->user->name }}</td>
                                     <td>{{ $session->max_capacity }}</td>
                                     <td>{{ $session->current_capacity }}</td>
-<td>
-    <span class="badge badge-status
-        @if ($session->status === 'active')
-            bg-success
-        @elseif ($session->status === 'expired')
-            bg-danger
-        @elseif ($session->status === 'scheduled')
-            bg-warning
-        @endif
-    ">
-        @if ($session->status === 'active')
-            نشطة
-        @elseif ($session->status === 'expired')
-            منتهية
-        @elseif ($session->status === 'scheduled')
-            مجدولة
-        @endif
-    </span>
-</td>
+                                    <td>
+                                        <span class="badge badge-status
+                                            @if ($session->status === 'active')
+                                                bg-success
+                                            @elseif ($session->status === 'expired')
+                                                bg-danger
+                                            @elseif ($session->status === 'scheduled')
+                                                bg-warning
+                                            @endif
+                                        ">
+                                            @if ($session->status === 'active')
+                                                نشطة
+                                            @elseif ($session->status === 'expired')
+                                                منتهية
+                                            @elseif ($session->status === 'scheduled')
+                                                مجدولة
+                                            @endif
+                                        </span>
+                                    </td>
                                     <td>
                                         <div class="action-buttons d-flex gap-1">
                                             <a href="{{ route('admin.sessions.show', $session->id) }}" class="btn btn-sm btn-info" title="عرض">
