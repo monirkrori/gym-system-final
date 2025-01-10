@@ -203,18 +203,20 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <img src="{{ asset('storage/' . $trainer->user->profile_photo) }}"
-                                                 class="rounded-circle me-2"
-                                                 width="40"
-                                                 height="40"
-                                                 alt="صورة المدرب">
+                                             class="rounded-circle me-3 border border-2 border-primary"
+                                             width="80"
+                                             height="80"
+                                             alt="صورة المدرب"
+                                             style="object-fit: cover;">
+
                                             <div>
                                                 <div class="fw-bold">{{ $trainer->user->name }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>{{ $trainer->specialization }}</td>
-                                    <td>{{ $trainer->experience_years}}</td>
-                                    <td>{{ $trainer->rating_avg}}</td>
+                                    <td>{{ $trainer-> experience_years}}</td>
+                                    <td>{{ $trainer-> rating_avg}}</td>
                                     <td>
                                         <span class="badge badge-status {{ $trainer->status === 'available' ? 'bg-success' : 'bg-danger' }}">
                                             {{ $trainer->status === 'available' ? 'نشط' : 'غير نشط' }}

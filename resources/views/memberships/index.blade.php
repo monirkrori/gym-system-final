@@ -325,11 +325,7 @@
             </div>
 
         @endcan
-        <a href="{{ route('admin.memberships.deleted') }}" class="btn btn-outline-secondary">
-            <i class="bi bi-trash me-1"></i> العضويات المحذوفات
-        </a>
     </div>
-
 @endsection
 
 @push('scripts')

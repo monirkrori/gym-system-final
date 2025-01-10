@@ -86,7 +86,7 @@
             <div class="card-body">
                 <form method="GET" action="{{ route('admin.meal-plans.index') }}" class="row g-3">
                     <div class="col-md-4">
-                        <input type="text" name="name" class="form-control" placeholder="بحث باسم الخطة" value="{{ request('name') }}">
+                        <input type="text" name="search" class="form-control" placeholder="بحث باسم الخطة" value="{{ request('search') }}">
                     </div>
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-primary w-100">
