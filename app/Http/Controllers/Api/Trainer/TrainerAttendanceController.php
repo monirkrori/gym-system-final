@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class TrainerAttendanceController extends Controller
 {
+
+    public function __construct()
+    {
+        // Define permissions
+        $this->middleware('permission:view-attendance-logs')->only('getSessionAttendance');
+        $this->middleware('permission:view-attendance-reports')->only('getAttendanceReport');
+    }
+
+
     /**
      * Get attendance logs for a specific training session.
      */

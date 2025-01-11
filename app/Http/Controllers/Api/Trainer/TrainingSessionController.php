@@ -15,7 +15,13 @@ class TrainingSessionController extends Controller
     public function __construct(TrainingSessionService $trainingSessionService)
     {
         $this->trainingSessionService = $trainingSessionService;
+
+        $this->middleware('permission:view-sessions')->only('index');
+        $this->middleware('permission:create-sessions')->only('store');
+        $this->middleware('permission:edit-sessions')->only('update');
+        $this->middleware('permission:delete-sessions')->only('destroy');
     }
+
 
     public function index()
     {

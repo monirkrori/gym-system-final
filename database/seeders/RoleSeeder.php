@@ -49,9 +49,8 @@ class RoleSeeder extends Seeder
             'view-membership-stats',
             'view-package-distribution',
             'list-activities',
-            'view_dashboard',
-            'view_training_sessions',
-            'view_memberships',
+            'view-dashboard',
+            'view-memberships',
         ]);
 
         // Trainer permissions
@@ -65,6 +64,11 @@ class RoleSeeder extends Seeder
             'view-schedule',
             'view-activities',
             'manage-activities',
+            'view-booking-history',
+            'view-attendance-reports',
+            'view-attendance-reports',
+            'view-equipment',
+            'manage-meal-plans',
         ]);
 
         // Member permissions
@@ -76,6 +80,13 @@ class RoleSeeder extends Seeder
             'subscribe-meal-plans',
             'view-statistics',
             'view-schedule',
+            'can-rating',
+            'view-booking-history',
+            'book-cancel-session',
+            'store-attendance',
+            'subscriptions',
+            'view-equipment',
+
         ]);
 
     }

@@ -103,11 +103,12 @@ class UserMembershipService
                 // Remove trainer role and assign member role if applicable
                 $trainer->delete();
                 $user->removeRole('trainer');
-                $user->assignRole('member');
+
             }
         });
 
         // Create and return the new membership
+        $user->assignRole('member');
         return UserMembership::create($membershipData);
     }
 

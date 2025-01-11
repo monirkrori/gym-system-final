@@ -11,6 +11,11 @@ use App\Http\Requests\Member\StoreAttendanceRequest;
 class AttendanceLogController extends Controller
 {
 
+
+    public function __construct()
+    {
+        $this->middleware('permission:store-attendance')->only('store');
+    }
     /**
      * Store member attendance.
      */

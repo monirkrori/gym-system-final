@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Member;
 use App\Events\MembershipPackageRegistered;
 use App\Events\MembershipRegistered;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Member\SubscribeMealPlanRequest;
 use App\Http\Requests\Member\SubscribeToMembershipRequest;
 use App\Http\Requests\Member\SubscribeToPackageRequest;
 use App\Models\MembershipPackage;
@@ -26,6 +27,7 @@ class SubscribeController extends Controller
     {
         // Assign the subscribe service to the controller property
         $this->subscribeService = $subscribeService;
+
     }
 
     /**
@@ -36,26 +38,20 @@ class SubscribeController extends Controller
      *
      * @param SubscribeToMembershipRequest $request The validated request containing the plan_id.
      */
-    public function subscribeToMembership(SubscribeToMembershipRequest $request)
+    public function subscribeMealPlan(SubscribeMealPlanRequest $request)
     {
         try {
-            // Subscribe the authenticated user to the membership plan
-            $userMembership = $this->subscribeService->subscribe(
-                auth()->id(), // Get the authenticated user's ID
-                $request->plan_id // Get the membership plan ID from the request
-            );
-
             $user = auth()->user();
-            $userMembership = MembershipPlan::find($request->plan_id);
 
-            // Trigger the MembershipRegistered event to notify about the new membership
-            event(new MembershipRegistered($user, $userMembership));
+            if (!$user) {
+                return $this->errorResponse('Unauthorized access.', 401);
+            }
 
+            $this->subscribeService->subscribeToMealPlan($user->id, $request->meal_plan_id);
 
-            return $this->successResponse($userMembership, 'Successfully subscribed to the membership plan.');
+            return $this->successResponse(null, 'Successfully subscribed to the meal plan.');
         } catch (\Exception $e) {
-
-            return $this->errorResponse($e->getMessage(), 500);
+            return $this->errorResponse('An error occurred: ' . $e->getMessage(), 500);
         }
     }
 

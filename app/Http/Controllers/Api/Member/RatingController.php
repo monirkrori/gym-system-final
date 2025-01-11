@@ -17,6 +17,9 @@ class RatingController extends Controller
     public function __construct(RatingService $ratingService)
     {
         $this->ratingService = $ratingService;
+
+        $this->middleware('permission:can-rating')->only(['store','update','show','reply']);
+
     }
 
     /**

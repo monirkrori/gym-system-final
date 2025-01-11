@@ -13,6 +13,14 @@ use App\Http\Requests\Member\CancelSessionRequest;
 
 class BookingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:book-cancel-session')->only(['bookSession','cancelSession']);
+        $this->middleware('permission:view-booking-history')->only('getBookingHistory');
+        $this->middleware('permission:view-usage-report')->only('getUsageReport');
+    }
+
     /**
      * Book a training session for the authenticated user.
      *

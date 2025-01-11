@@ -14,7 +14,6 @@ class SubscribeMealPlanRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id', // User must exist
             'meal_plan_id' => 'required|exists:meal_plans,id', // Meal plan must exist
         ];
     }
@@ -22,9 +21,7 @@ class SubscribeMealPlanRequest extends FormRequest
     public function messages()
     {
         return [
-            'user_id.required' => 'The user ID is required.',
             'meal_plan_id.required' => 'The meal plan ID is required.',
-            'user_id.exists' => 'The user does not exist.',
             'meal_plan_id.exists' => 'The meal plan does not exist.',
         ];
     }

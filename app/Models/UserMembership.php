@@ -10,7 +10,7 @@ class UserMembership extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['user_id', 'package_id', 'start_date', 'end_date', 'remaining_sessions', 'status', 'plan_id'];
+    protected $fillable = ['user_id', 'package_id', 'start_date', 'end_date', 'remaining_sessions', 'status', 'plan_id','meal_plan_id'];
 
     public function user()
     {

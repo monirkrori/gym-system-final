@@ -14,16 +14,17 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            'subscriptions',
             'manage-subscriptions',
             'create-role',
             'edit-role',
             'delete-role',
-
             'view-trainer',
             'create-trainer',
             'edit-trainer',
+            'generate-reports',
+            'subscribe-meal-plans',
             'delete-trainer',
-
             'view-sessions',
             'create-sessions',
             'update-sessions',
@@ -33,10 +34,8 @@ class PermissionSeeder extends Seeder
             'track-attendance',
             'view-revenue',
             'view-reports',
-            'generate-reports',
             'manage-meal-plans',
             'view-meal-plans',
-            'subscribe-meal-plans',
             'view-statistics',
             'view-schedule',
             'view-activities',
@@ -45,11 +44,10 @@ class PermissionSeeder extends Seeder
             'view-membership-stats',
             'view-package-distribution',
             'list-activities',
-            'view_dashboard',
-            'view_members',
-            'view_training_sessions',
-            'view_equipment',
-            'view_memberships',
+            'view-dashboard',
+            'view-members',
+            'view-equipment',
+            'view-memberships',
             'export-memberships-pdf',
             'export-memberships-excel',
             'export-memberships',
@@ -60,7 +58,13 @@ class PermissionSeeder extends Seeder
             'view-membership',
             'manage-membership-package',
             'manage-membership-plan',
-
+            'view-attendance-reports',
+            'view-attendance-logs',
+            'store-attendance',
+            'view-usage-report',
+            'view-booking-history',
+            'book-cancel-session',
+            'can-rating',
         ];
 
         // Looping and Inserting Array's Permissions into Permission Table

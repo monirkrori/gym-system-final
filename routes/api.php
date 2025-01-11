@@ -57,7 +57,7 @@ Route::prefix('member')->middleware('auth:sanctum')->group(function () {
     Route::get('sessions/{id}', [GetTrainingSessionController::class, 'show']);
 
     // Subscription routes
-    Route::post('subscribe', [SubscribeController::class, 'subscribeToMembership']);
+    Route::post('subscribe-plan', [SubscribeController::class, 'subscribeToMembership']);
     Route::post('subscribe-package', [SubscribeController::class, 'subscribeToPackage']);
 
     // Booking routes
@@ -81,7 +81,7 @@ Route::prefix('member')->middleware('auth:sanctum')->group(function () {
 
     // Meal plan routes
     Route::prefix('meal-plan')->group(function () {
-        Route::post('subscribe', [MealPlanController::class, 'subscribe']);
+        Route::post('subscribe', [MealPlanController::class, 'subscribeMealPlan']);
         Route::get('{id}', [MealPlanController::class, 'show']);
     });
 });

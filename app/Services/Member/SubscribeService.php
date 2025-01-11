@@ -2,6 +2,7 @@
 
 namespace App\Services\Member;
 
+use App\Models\MealPlan;
 use App\Models\MembershipPlan;
 use App\Models\UserMembership;
 use App\Models\MembershipPackage;
@@ -28,7 +29,6 @@ class SubscribeService
 
         // Calculate remaining sessions
         $remainingSessions = $this->calculateRemainingSessions($packageId);
-
 
 
         // Create or update the user membership
@@ -74,6 +74,35 @@ class SubscribeService
 
         return $userMembership;
     }
+
+    public function subscribeToMealPlan($userId, $mealPlanId)
+    {
+        $userMembership = UserMembership::where('user_id', $userId)
+            ->where('status', 'active')
+            ->first();
+
+        if (!$userMembership) {
+            throw new \Exception('User does not have an active membership.');
+        }
+
+        $mealPlan = MealPlan::find($mealPlanId);
+
+        if (!$mealPlan) {
+            throw new \Exception('Meal plan not found.');
+        }
+
+
+        if ($userMembership->meal_plan_id == $mealPlanId) {
+            throw new \Exception('User is already subscribed to this meal plan.');
+        }
+
+        $userMembership->meal_plan_id = $mealPlanId;
+
+        $userMembership->save();
+
+        return $userMembership;
+    }
+
 
     /**
      * Calculate remaining sessions based on the package
