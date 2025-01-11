@@ -106,6 +106,7 @@
                                 <th>#</th>
                                 <th>اسم الخطة</th>
                                 <th>السعرات اليومية</th>
+                                <th>السعر</th>
                                 <th>الوصف</th>
                                 <th>الإجراءات</th>
                             </tr>
@@ -116,6 +117,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $plan->name }}</td>
                                     <td>{{ $plan->calories_per_day }}</td>
+                                    <td>{{ $plan->price }}$</td>
                                     <td>{{ Str::limit($plan->description, 50, '...') }}</td>
                                     <td>
                                         <div class="action-buttons d-flex gap-1">

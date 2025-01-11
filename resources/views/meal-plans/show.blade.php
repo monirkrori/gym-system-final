@@ -15,6 +15,7 @@
             <ul class="list-group">
                 <li class="list-group-item"><strong>اسم الخطة:</strong> {{ $mealPlan->name }}</li>
                 <li class="list-group-item"><strong>السعرات الحرارية اليومية:</strong> {{ $mealPlan->calories_per_day }} كيلو كالوري</li>
+                <li class="list-group-item"><strong>السعر:</strong> {{ $mealPlan->price }}$</li>
                 <li class="list-group-item"><strong>الوصف:</strong> {{ $mealPlan->description ?? 'لا يوجد' }}</li>
             </ul>
         </div>

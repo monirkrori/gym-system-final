@@ -38,6 +38,12 @@
                                 @enderror
                             </div>
 
+                            <!--السعر-->
+                            <div class="mb-3">
+                                <label for="price" class="form-label">السعر</label>
+                                <input type="number" step="0.01" name="price" id="price" class="form-control" value="{{ old('price') }}" required>
+                            </div>
+
                             <!-- السعرات الحرارية اليومية -->
                             <div class="col-md-6 mb-3">
                                 <label for="calories_per_day" class="form-label">السعرات الحرارية اليومية</label>

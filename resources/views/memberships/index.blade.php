@@ -240,6 +240,7 @@
                                 <th>تاريخ بدء العضوية</th>
                                 <th>تاريخ انتهاء العضوية</th>
                                 <th>الحالة</th>
+                                <th>المبلغ الإجمالي</th>
                                 <th>الإجراءات</th>
                             </tr>
                             </thead>
@@ -273,6 +274,14 @@
                                         <span class="badge badge-status {{ $membership->status === 'active' ? 'bg-success' : 'bg-danger' }}">
                                             {{ $membership->status === 'active' ? 'نشط' : 'منتهي' }}
                                         </span>
+                                    </td>
+                                    <td>
+                                        @php
+                                            $totalPayment = ($membership->plan->price ?? 0) +
+                                                            ($membership->package->price ?? 0) +
+                                                            ($membership->mealPlan->price ?? 0);
+                                        @endphp
+                                        <span>{{ number_format($totalPayment, 2) }} $</span>
                                     </td>
                                     <td>
                                         <div class="action-buttons d-flex gap-1">
