@@ -272,6 +272,9 @@
                 <i class="bi bi-shield-lock me-2"></i> ليس لديك الصلاحية للوصول إلى هذه الصفحة
             </div>
         @endcan
+        <a href="{{ route('admin.trainers.deleted') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-trash me-1"></i> العضويات المحذوفات
+        </a>
     </div>
 @endsection
 

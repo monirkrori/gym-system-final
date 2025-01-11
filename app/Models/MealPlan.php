@@ -9,7 +9,7 @@ class MealPlan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'calories_per_day'];
+    protected $fillable = ['name', 'description', 'calories_per_day','price'];
 
     public function users()
     {
