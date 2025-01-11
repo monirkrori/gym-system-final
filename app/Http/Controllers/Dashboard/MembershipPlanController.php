@@ -128,4 +128,31 @@ class MembershipPlanController extends Controller
             ->route('admin.membership-plans.index')
             ->with('success', 'Membership Plan deleted successfully.');
     }
+
+    // Restore the specified membership plan from soft delete.
+    public function restore($id)
+    {
+        $membershipPlan = MembershipPlan::withTrashed()->findOrFail($id);
+        $membershipPlan->restore();
+
+        return redirect()->route('admin.membership-plans.index')
+            ->with('success', 'Membership Plan restored successfully.');
+    }
+
+    // Force delete the specified membership plan.
+    public function forceDelete($id)
+    {
+        $membershipPlan = MembershipPlan::withTrashed()->findOrFail($id);
+        $membershipPlan->forceDelete();
+
+        return redirect()->route('admin.membership-plans.index')
+            ->with('success', 'Membership Plan permanently deleted.');
+    }
+
+    // Show a list of deleted membership plans 
+    public function deleted()
+    {
+        $deletedMembershipPlans = MembershipPlan::onlyTrashed()->get();
+        return view('membership-plans.deleted', compact('deletedMembershipPlans'));
+    }
 }

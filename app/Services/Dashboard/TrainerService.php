@@ -74,6 +74,27 @@ class TrainerService
         return $trainer->delete();
     }
 
+    // Restore the trainer
+    public function restoreTrainer($id)
+    {
+        $trainer = Trainer::withTrashed()->findOrFail($id);
+        $trainer->restore();
+    }
+
+    // Force delete the trainer 
+    public function forceDeleteTrainer($id)
+    {
+        $trainer = Trainer::withTrashed()->findOrFail($id);
+        $trainer->forceDelete();
+    }
+
+    // Get all deleted trainers
+    public function deletedTrainers()
+    {
+        $deletedTrainers = Trainer::onlyTrashed()->get();
+        return $deletedTrainers;
+    }
+
     /**
      * Get all users for trainer selection.
      */

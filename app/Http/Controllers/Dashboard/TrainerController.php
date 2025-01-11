@@ -100,6 +100,35 @@ class TrainerController extends Controller
         return redirect()->route('admin.trainers.index')->with('success', 'Trainer deleted successfully.');
     }
 
+    public function restore($id)
+    {
+        // Calling the restore method from the TrainerService
+        $this->trainerService->restoreTrainer($id);
+
+        return redirect()->route('admin.trainers.index')->with('success', 'تم استعادة المدرب بنجاح!');
+    }
+
+    /**
+     * Permanently delete the trainer.
+     */
+    public function forceDelete($id)
+    {
+        // Calling the forceDelete method from the TrainerService
+        $this->trainerService->forceDeleteTrainer($id);
+
+        return redirect()->route('admin.trainers.index')->with('success', 'تم حذف المدرب بشكل نهائي!');
+    }
+
+    /**
+     * Display a listing of deleted trainers.
+     */
+    public function deleted()
+    {
+        // Fetching the deleted trainers using the TrainerService
+        $deletedTrainers = $this->trainerService->deletedTrainers();
+
+        return view('trainers.deleted', compact('deletedTrainers'));
+    }
     /**
      * Export trainers data as PDF or Excel.
      */
