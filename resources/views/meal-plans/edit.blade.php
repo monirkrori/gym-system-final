@@ -41,6 +41,10 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">السعر</label>
+                        <input type="number" step="0.01" name="price" id="price" class="form-control" value="{{ old('price', $mealPlan->price ?? '') }}" required>
+                    </div>
 
                     <div class="mb-3">
                         <label for="calories_per_day" class="form-label">السعرات الحرارية اليومية</label>

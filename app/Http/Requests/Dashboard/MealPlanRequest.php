@@ -18,6 +18,7 @@ class MealPlanRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'calories_per_day' => 'required|integer|min:0',
+            'price' => 'required|numeric',
         ];
     }
 }
