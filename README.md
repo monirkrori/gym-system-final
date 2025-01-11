@@ -138,7 +138,6 @@ For ERD Digram, you can see the Erd Digram :
 - **Laravel 10.x**: PHP framework for web development.
 - **Blade**: Templating engine used for building the admin dashboard.
 - **Spatie Laravel Permission**: For handling user roles and permissions.
-- **Livewire**: For building dynamic interfaces.
 - **Dompdf**: For generating PDF reports (exporting trainer,member schedules).
 - **Pusher**: For real-time communication (notifications).
 - **maatwebsite/excel**: For handling Excel files (exporting trainer,member data).
