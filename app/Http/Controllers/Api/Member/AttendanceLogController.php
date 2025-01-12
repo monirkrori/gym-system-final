@@ -2,57 +2,102 @@
 
 namespace App\Http\Controllers\Api\Member;
 
-use App\Models\User;
-use App\Models\AttendanceLog;
-use App\Models\TrainingSession;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\StoreAttendanceRequest;
+use App\Http\Requests\Member\CheckOutRequest;
+use App\Services\Member\AttendanceService;
+use Illuminate\Support\Facades\Log;
 
 class AttendanceLogController extends Controller
 {
+    private $attendanceService;
 
-
-    public function __construct()
+    public function __construct(AttendanceService $attendanceService)
     {
-        $this->middleware('permission:store-attendance')->only('store');
+        $this->attendanceService = $attendanceService;
+
+        // Middleware for permission control
+        $this->middleware('permission:store-attendance')->only(['store', 'checkout']);
     }
+
     /**
-     * Store member attendance.
+     * Store member attendance (Check-in).
+     *
+     * @param StoreAttendanceRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreAttendanceRequest $request)
     {
-        $user = auth()->user();
+        try {
+            $user = auth()->user();
 
-        if (!$user) {
-            return $this->errorResponse('Unauthorized.', 401);
+            if (!$user) {
+                return $this->errorResponse('Unauthorized. User not authenticated.', 401);
+            }
+
+            $result = $this->attendanceService->recordAttendance($user->id, $request->training_session_id);
+
+            Log::info('Attendance record result:', $result);
+
+            if (isset($result['success']) && $result['success']) {
+                return $this->successResponse($result['data'], $result['message']);
+            }
+
+            return $this->errorResponse($result['message'] ?? 'An unknown error occurred.', 400);
+        } catch (\Exception $e) {
+            Log::error('Error recording attendance: ' . $e->getMessage(), [
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return $this->errorResponse('An error occurred while recording attendance.', 500);
         }
-
-        // Check if the training session exists and is scheduled
-        $trainingSession = TrainingSession::find($request->training_session_id);
-        if (!$trainingSession || $trainingSession->status !== 'scheduled') {
-            return $this->errorResponse('Training session is not available for attendance.', 404);
-        }
-
-        // Check if attendance already exists for this session and user
-        $existingAttendance = AttendanceLog::where('user_id', $request->user->id)
-            ->where('training_session_id', $request->training_session_id)
-            ->first();
-
-        if ($existingAttendance) {
-            return $this->errorResponse('Attendance already recorded for this session.', 409);
-        }
-
-        // Record attendance
-        $attendance = AttendanceLog::create([
-            'user_id' => $request->user->id,
-            'training_session_id' => $request->training_session_id,
-            'check_in' => $request->check_in,
-            'check_out' => $request->check_out,
-            'status' => $request->status,
-            'notes' => $request->notes,
-        ]);
-
-        return $this->successResponse($attendance, 'Attendance recorded successfully.');
     }
 
+
+
+    /**
+     * Handle checkout process.
+     *
+     * @param CheckOutRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function checkout(CheckOutRequest $request)
+    {
+        try {
+            $user = auth()->user();
+
+            if (!$user) {
+                return $this->errorResponse('Unauthorized. User not authenticated.', 401);
+            }
+
+            $result = $this->attendanceService->recordCheckout($user->id, $request->training_session_id);
+
+            return $result['success']
+                ? $this->successResponse($result['data'], $result['message'])
+                : $this->errorResponse($result['message'], 400);
+        } catch (\Exception $e) {
+            Log::error('Error during checkout: ' . $e->getMessage());
+            return $this->errorResponse('An error occurred during checkout.', 500);
+        }
+    }
+
+    /**
+     * Mark users as absent if they haven't checked in after the grace period.
+     *
+     * @param int $trainingSessionId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function markAbsent($trainingSessionId)
+    {
+        try {
+            $result = $this->attendanceService->markAbsentUsers($trainingSessionId);
+
+            return $result['success']
+                ? $this->successResponse($result['data'], $result['message'])
+                : $this->errorResponse($result['message'], 400);
+        } catch (\Exception $e) {
+            Log::error('Error marking users as absent: ' . $e->getMessage());
+            return $this->errorResponse('An error occurred while marking users as absent.', 500);
+        }
+    }
 }

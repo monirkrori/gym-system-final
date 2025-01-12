@@ -9,7 +9,7 @@ class AttendanceLog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'check_in', 'check_out', 'status', 'notes'];
+    protected $fillable = ['user_id', 'check_in', 'check_out', 'status', 'notes','training_session_id'];
 
     public function user()
     {

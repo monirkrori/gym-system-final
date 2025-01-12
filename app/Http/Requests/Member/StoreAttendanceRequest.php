@@ -6,28 +6,24 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAttendanceRequest extends FormRequest
 {
-    public function authorize()
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
     {
-        return true; // Allow all users
+        return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            'training_session_id' => 'required|exists:training_sessions,id', // Valid training session
-            'check_in' => 'required|date|before_or_equal:now', // Check-in time should be now or before
-            'check_out' => 'nullable|date|after:check_in', // Check-out time, must be after check-in if exists
-            'status' => 'required|in:present,absent', // Attendance status
-            'notes' => 'nullable|string|max:255', // Optional notes
+            'training_session_id' => [
+                'required',
+                'integer',
+                'exists:training_sessions,id',
+            ],
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'training_session_id.required' => 'The training session ID is required.',
-            'check_in.required' => 'The check-in time is required.',
-            'check_out.after' => 'Check-out time must be after check-in time.',
-        ];
-    }
 }
+
