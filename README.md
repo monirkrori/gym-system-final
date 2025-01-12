@@ -125,7 +125,7 @@ To run this project locally, follow the steps below:
 
 For API testing, you can see the Postman collection :
 
-[https://www.postman.com/research-geoscientist-78470583/workspace/my-workspace/collection/39063412-72cd18ef-1928-4769-9ece-086a621fcb39?action=share&creator=39063412](#)
+[https://www.postman.com/payload-cosmologist-54490583/workspace/my-workspace/collection/38817975-edad80d2-a0d0-458d-b151-97ab7bad39d1?action=share&creator=38817975](#)
 
 ## ErdDigram 
 
